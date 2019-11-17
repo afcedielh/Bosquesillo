@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 /**
@@ -36,6 +37,12 @@ public class Registro {
 	JButton botones[];
 	JLabel fondoMenu;
 	ImageIcon imagenFondoMenu;
+	//formulario
+		private JFrame frame = new JFrame();
+		private JTextField txtTamanoX;
+		private JTextField txtTamanoY;
+		private JTextField txtmonstruos;
+		private JTextField txtpuntosObjetivo;
 
 	//juego
 
@@ -57,9 +64,9 @@ public class Registro {
 	Timer timer;
 
 	//fantasmas
-	Monstruos fantasma1;
-	Monstruos fantasma2;
-	Monstruos fantasma3;
+	Monstruos letal1;
+	Monstruos letal2;
+	Monstruos letal3;
 	static int matAux[][];
 
 
@@ -104,6 +111,7 @@ public class Registro {
 				System.out.println("iniciar");
 				menu();
 				eventoMenu();
+				inicialize();
 			}
 
 		});
@@ -181,9 +189,9 @@ public class Registro {
 		records.setForeground(Color.white);
 		panelJuego.add(records,0);
 		mover();
-		fantasma1 = new Monstruos(12 ,13 ); 
-		fantasma2 = new Monstruos(13 ,13 );
-		fantasma3 = new Monstruos(13 ,12 );
+		letal1 = new Monstruos(12 ,13 ); 
+		letal2 = new Monstruos(13 ,13 );
+		letal3 = new Monstruos(13 ,12 );
 		ventana.add(panelJuego);
 
 	}
@@ -269,9 +277,9 @@ public class Registro {
 
 				//matar pacman
 				if(  mat[px][py+1] == 7 || mat[px][py-1] == 7 || mat[px-1][py] == 7 || mat[px+1][py] == 7 ){
-					fantasma1.timer.stop();
-					fantasma2.timer.stop();
-					fantasma3.timer.stop();
+					letal1.timer.stop();
+					letal2.timer.stop();
+					letal3.timer.stop();
 					JOptionPane.showMessageDialog(ventana, "ESTAS MUERTO");
 					panelJuego.setVisible(false);
 					panelMenu.setVisible(true);
@@ -507,5 +515,111 @@ public class Registro {
 		});
 
 	}
+	private void inicialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 400, 400);
+		//frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);        
 
-}
+		JLabel lbltamano = new JLabel("Tamaño: ");
+		lbltamano.setBounds(10, 31, 60, 14);
+		frame.getContentPane().add(lbltamano);
+		lbltamano.setVisible(true);
+		panelMenu.add(lbltamano,0);
+
+		txtTamanoX = new JTextField();
+		txtTamanoX.setBounds(80, 28, 30, 20);
+		frame.getContentPane().add(txtTamanoX);
+		txtTamanoX.setColumns(10);
+		txtTamanoX.setVisible(true);
+		panelMenu.add(txtTamanoX,0);
+
+		txtTamanoY = new JTextField();
+		txtTamanoY.setBounds(110, 28, 30, 20);
+		frame.getContentPane().add(txtTamanoY);
+		txtTamanoY.setColumns(10); 
+		txtTamanoY.setVisible(true);
+		panelMenu.add(txtTamanoY,0);
+
+
+
+		JLabel lblmonstruos = new JLabel("Monstruos: ");
+		lblmonstruos.setBounds(10, 60, 100, 14);
+		frame.getContentPane().add(lblmonstruos);
+		lblmonstruos.setVisible(true);
+		panelMenu.add(lblmonstruos,0);
+		
+		
+		txtpuntosObjetivo = new JTextField();
+		txtpuntosObjetivo.setBounds(110, 90, 30, 20);
+		frame.getContentPane().add(txtpuntosObjetivo);
+		txtpuntosObjetivo.setColumns(10); 
+		txtpuntosObjetivo.setVisible(true);
+		panelMenu.add(txtpuntosObjetivo,0);
+		
+		JLabel lblpuntos = new JLabel("Puntos objetivo: ");
+		lblpuntos.setBounds(10, 90, 100, 14);
+		frame.getContentPane().add(lblpuntos);
+		lblpuntos.setVisible(true);
+		panelMenu.add(lblpuntos,0);
+		
+		
+
+		txtmonstruos = new JTextField();
+		txtmonstruos.setBounds(80, 60, 60, 20);
+		frame.getContentPane().add(txtmonstruos);
+		txtmonstruos.setColumns(10);
+		txtmonstruos.setVisible(true);
+		panelMenu.add(txtmonstruos,0);
+
+		JButton btnAgregar = new JButton("Agregar");        
+		btnAgregar.setBounds(160, 90, 100, 23);
+		frame.getContentPane().add(btnAgregar);
+		panelMenu.add(btnAgregar,0);
+		btnAgregar.addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent e) {			
+				try {
+					btnAgregar_Click();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+
+			private void btnAgregar_Click() {
+				// TODO Auto-generated method stub
+				
+			}	
+		});
+		
+		
+		
+		JButton btnGuardar = new JButton("Guardar");        
+		btnGuardar.setBounds(10, 120, 110, 23);
+		frame.getContentPane().add(btnGuardar);
+		panelMenu.add(btnGuardar,0);
+		btnGuardar.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {			
+				try {
+					btnGuardar_Click();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+			
+
+			private void btnGuardar_Click() {
+				// TODO Auto-generated method stub
+				
+			}	
+			
+		});
+	}
+
+	}
+
+
+
+
