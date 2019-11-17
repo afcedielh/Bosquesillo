@@ -7,6 +7,8 @@ public class Inicio {
 
 	public static void main(String[] args) {
 		Controlador c = new Controlador(new Laberinto(0, null, null));
+		//prueba khhbds
+		
 		try {
 			Registro window = new Registro();
 		} catch (Exception e) {
