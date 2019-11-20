@@ -17,12 +17,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import Modelo.Actor;
+import Modelo.Laberinto;
+
 /**
  *
  * @author oneiber
  */
 public class Registro {
 
+	
+	private Laberinto lab;
+	
 	//atributos
 	static JFrame ventana;
 
@@ -38,11 +44,11 @@ public class Registro {
 	JLabel fondoMenu;
 	ImageIcon imagenFondoMenu;
 	//formulario
-		private JFrame frame = new JFrame();
-		private JTextField txtTamanoX;
-		private JTextField txtTamanoY;
-		private JTextField txtmonstruos;
-		private JTextField txtpuntosObjetivo;
+	private JFrame frame = new JFrame();
+	private JTextField txtTamanoX;
+	private JTextField txtTamanoY;
+	private JTextField txtmonstruos;
+	private JTextField txtpuntosObjetivo;
 
 	//juego
 
@@ -104,7 +110,7 @@ public class Registro {
 		for (int i = 0; i < botones.length; i++) {
 			botones[i] = new JButton();
 		}
-		
+
 		iniciar.addMouseListener(new MouseAdapter() {
 
 			public void mousePressed(MouseEvent e){
@@ -549,22 +555,22 @@ public class Registro {
 		frame.getContentPane().add(lblmonstruos);
 		lblmonstruos.setVisible(true);
 		panelMenu.add(lblmonstruos,0);
-		
-		
+
+
 		txtpuntosObjetivo = new JTextField();
 		txtpuntosObjetivo.setBounds(110, 90, 30, 20);
 		frame.getContentPane().add(txtpuntosObjetivo);
 		txtpuntosObjetivo.setColumns(10); 
 		txtpuntosObjetivo.setVisible(true);
 		panelMenu.add(txtpuntosObjetivo,0);
-		
+
 		JLabel lblpuntos = new JLabel("Puntos objetivo: ");
 		lblpuntos.setBounds(10, 90, 100, 14);
 		frame.getContentPane().add(lblpuntos);
 		lblpuntos.setVisible(true);
 		panelMenu.add(lblpuntos,0);
-		
-		
+
+
 
 		txtmonstruos = new JTextField();
 		txtmonstruos.setBounds(80, 60, 60, 20);
@@ -588,12 +594,23 @@ public class Registro {
 
 			private void btnAgregar_Click() {
 				// TODO Auto-generated method stub
-				
-			}	
+				try {
+					int X = Integer.parseInt(txtTamanoX.getText());
+					int Y = Integer.parseInt(txtTamanoY.getText());
+					int monstruos = Integer.parseInt(txtmonstruos.getText());
+					lab = new Laberinto(1,new Actor[X][Y],null);
+					lab.ConfigurarTablero(monstruos);
+					Actor[][] ac = lab.getActor();
+					int id = 0;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	 
 		});
-		
-		
-		
+
+
+
 		JButton btnGuardar = new JButton("Guardar");        
 		btnGuardar.setBounds(10, 120, 110, 23);
 		frame.getContentPane().add(btnGuardar);
@@ -607,18 +624,18 @@ public class Registro {
 					e1.printStackTrace();
 				}
 			}
-			
-			
+
+
 
 			private void btnGuardar_Click() {
 				// TODO Auto-generated method stub
-				
+
 			}	
-			
+
 		});
 	}
 
-	}
+}
 
 
 
