@@ -19,6 +19,8 @@ import javax.swing.Timer;
 
 import Modelo.Actor;
 import Modelo.Laberinto;
+import Modelo.Obstaculo;
+
 
 /**
  *
@@ -26,9 +28,8 @@ import Modelo.Laberinto;
  */
 public class Registro {
 
-	
 	private Laberinto lab;
-	
+
 	//atributos
 	static JFrame ventana;
 
@@ -173,9 +174,44 @@ public class Registro {
 		fondoJuego.setVisible(true);
 		panelJuego.add(fondoJuego,0);
 
-		for (int i = 0; i < mat.length; i++) {
-			for (int j = 0; j < mat.length; j++) {
-				matriz[i][j].setIcon(new ImageIcon("imagenes/"+mat[i][j]+".png"));
+		//for (int i = 0; i < mat.length; i++) {
+		//for (int j = 0; j < mat.length; j++) {
+		for (int i = 0; i < lab.getActor().length; i++) {
+			for (int j = 0; j <lab.getActor().length; j++) {
+				if (lab.getActor()[i][j] != null) {
+					if(lab.getActor()[i][j].getObstaculo()!= null)
+					{
+						switch (lab.getActor()[i][j].getObstaculo().ordinal()) {
+						case 1:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/5.png"));
+							break;
+						case 2:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/4.png"));
+							break;
+						case 3:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/7.png"));
+							break;
+						case 4:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/9.png"));
+							break;
+						case 5:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/6.png"));
+							break;
+						case 6:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/8.png"));
+							break;
+						default:
+							matriz[i][j].setIcon(new ImageIcon("imagenes/0.png"));
+							
+							break;
+						}
+					}else {
+						matriz[i][j].setIcon(new ImageIcon("imagenes/0.png"));
+					}
+				}else {
+					matriz[i][j].setIcon(new ImageIcon("imagenes/0.png"));
+				}
+
 				matriz[i][j].setBounds(120+(i*30), 120+(j*30), 30, 30);
 				matriz[i][j].setVisible(true);
 				panelJuego.add(matriz[i][j],0);
@@ -194,7 +230,7 @@ public class Registro {
 		records.setVisible(true);
 		records.setForeground(Color.white);
 		panelJuego.add(records,0);
-		mover();
+		//mover();
 		letal1 = new Monstruos(12 ,13 ); 
 		letal2 = new Monstruos(13 ,13 );
 		letal3 = new Monstruos(13 ,12 );
@@ -202,7 +238,7 @@ public class Registro {
 
 	}
 
-	public static void pintarMatriz(){
+	/*public static void pintarMatriz(){
 		for (int i = 0; i < mat.length; i++) {
 			for (int j = 0; j < mat.length; j++) {
 				matriz[i][j].setIcon(new ImageIcon("imagenes/"+mat[i][j]+".png"));
@@ -212,7 +248,7 @@ public class Registro {
 			}
 		}
 	}
-
+*/
 	public void mover(){
 
 		timer = new Timer (200, new ActionListener () 
@@ -228,7 +264,7 @@ public class Registro {
 					matAux[px][py] = mat[px][py]; //esto es nuevo
 					py = py-1;
 					mat[px][py] = 3;
-					pintarMatriz();
+					//pintarMatriz();
 
 				}
 				if( abajo == 1 && (mat[px][py+1]==1 || mat[px][py+1]==0)){
@@ -240,7 +276,7 @@ public class Registro {
 					matAux[px][py] = mat[px][py]; //esto es nuevo
 					py = py+1;
 					mat[px][py] = 3;
-					pintarMatriz();
+					//pintarMatriz();
 
 				}
 				if( izq == 1 && (mat[px-1][py]==1 || mat[px-1][py]==0)){
@@ -252,7 +288,7 @@ public class Registro {
 					matAux[px][py] = mat[px][py]; //esto es nuevo
 					px = px-1;
 					mat[px][py] = 3;
-					pintarMatriz();
+					//pintarMatriz();
 
 				}
 				if( der == 1 && (mat[px+1][py]==1 || mat[px+1][py]==0)){
@@ -264,7 +300,7 @@ public class Registro {
 					matAux[px][py] = mat[px][py]; //esto es nuevo
 					px = px+1;
 					mat[px][py] = 3;
-					pintarMatriz();
+					//pintarMatriz();
 
 				}
 				int enc = 0;
@@ -281,7 +317,7 @@ public class Registro {
 					timer.stop();
 				}
 
-				//matar pacman
+				//matar 
 				if(  mat[px][py+1] == 7 || mat[px][py-1] == 7 || mat[px-1][py] == 7 || mat[px+1][py] == 7 ){
 					letal1.timer.stop();
 					letal2.timer.stop();
@@ -380,46 +416,7 @@ public class Registro {
 			};
 
 			return aux;
-		}
-		if( opcion == 2){
-			int aux[][] = {
-					{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-					{2,2,2,2,2,1,1,2,1,1,1,1,1,1,2},
-					{2,2,2,2,2,2,1,2,1,2,2,1,2,1,2},
-					{2,2,2,2,2,2,1,1,1,1,2,1,2,1,2},
-					{2,2,2,2,2,2,2,1,2,1,1,1,1,1,2},
-					{2,2,2,2,2,1,1,1,2,2,2,1,2,2,2},
-					{2,1,2,2,1,2,2,1,1,2,2,1,1,1,2},
-					{2,1,1,1,1,1,2,2,1,1,1,1,2,1,2},
-					{2,2,2,1,2,1,2,2,2,1,2,1,2,1,2},
-					{2,1,1,1,2,1,1,1,1,1,1,1,1,1,2},
-					{2,1,2,1,1,1,2,2,2,1,2,1,2,1,2},
-					{2,1,1,1,2,1,2,1,1,1,1,1,2,1,2},
-					{2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
-					{2,1,1,1,2,1,1,1,1,1,1,1,1,1,2},
-					{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-			};
-			return aux;
-		}
-		if( opcion == 3){
-			int aux[][] = {
-					{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-					{2,1,1,1,1,1,1,2,1,1,1,1,1,1,2},
-					{2,1,2,2,1,2,1,2,1,2,2,1,2,1,2},
-					{2,1,2,1,1,2,1,1,1,1,2,1,2,1,2},
-					{2,1,1,1,2,2,2,1,2,1,1,1,1,1,2},
-					{2,1,2,1,1,1,1,1,2,2,2,1,2,2,2},
-					{2,1,2,2,1,2,2,1,1,2,2,1,1,1,2},
-					{2,1,1,1,1,1,2,2,1,1,1,1,2,1,2},
-					{2,2,2,1,2,1,2,2,2,1,2,1,2,1,2},
-					{2,1,1,1,2,1,1,1,1,1,1,1,1,1,2},
-					{2,1,2,1,1,1,2,2,2,1,2,1,2,1,2},
-					{2,1,1,1,2,1,2,1,1,1,1,1,2,1,2},
-					{2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
-					{2,1,1,1,2,1,1,1,1,1,1,1,1,1,2},
-					{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-			};
-			return aux;
+		
 		}
 		return aux1;
 	}
@@ -579,7 +576,7 @@ public class Registro {
 		txtmonstruos.setVisible(true);
 		panelMenu.add(txtmonstruos,0);
 
-		JButton btnAgregar = new JButton("Agregar");        
+		JButton btnAgregar = new JButton("Jugar");        
 		btnAgregar.setBounds(160, 90, 100, 23);
 		frame.getContentPane().add(btnAgregar);
 		panelMenu.add(btnAgregar,0);
@@ -601,6 +598,7 @@ public class Registro {
 					lab = new Laberinto(1,new Actor[X][Y],null);
 					lab.ConfigurarTablero(monstruos);
 					Actor[][] ac = lab.getActor();
+					jugar();
 					int id = 0;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -636,7 +634,6 @@ public class Registro {
 	}
 
 }
-
 
 
 

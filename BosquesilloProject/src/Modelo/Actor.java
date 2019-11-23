@@ -1,5 +1,7 @@
 package Modelo;
 
+import javax.swing.ImageIcon;
+
 public class Actor {
 	private Obstaculo obstaculo;
 	private Carro carro;
@@ -34,6 +36,11 @@ public class Actor {
 
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
+	}
+
+	public void setIcon(ImageIcon imageIcon) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

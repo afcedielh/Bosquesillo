@@ -43,7 +43,7 @@ public class Monstruos {
                         Registro.mat[letx][lety] = Registro.matAux[letx][lety];
                         letx -=1;
                         Registro.mat[letx][lety]=7;
-                        Registro.pintarMatriz();
+                        //Registro.pintarMatriz();
                     }else
                     //choca con la pared
                     if(letx > 0 && Registro.mat[letx-1][lety] == 2 ){
@@ -61,7 +61,7 @@ public class Monstruos {
                         Registro.mat[letx][lety] = Registro.matAux[letx][lety];
                         letx +=1;
                         Registro.mat[letx][lety]=7;
-                        Registro.pintarMatriz();
+                        //Registro.pintarMatriz();
                     }else
                     
                     if(letx < 14 && Registro.mat[letx+1][lety] == 2 ){
@@ -79,7 +79,7 @@ public class Monstruos {
                         Registro.mat[letx][lety] = Registro.matAux[letx][lety];
                         lety -=1;
                         Registro.mat[letx][lety]=7;
-                        Registro.pintarMatriz();
+                        //Registro.pintarMatriz();
                     }else
                     if(letx > 0 && Registro.mat[letx][lety-1] == 2 ){
                         direccion = aleatorio.nextInt(4); 
@@ -95,7 +95,7 @@ public class Monstruos {
                         Registro.mat[letx][lety] = Registro.matAux[letx][lety];
                         lety +=1;
                         Registro.mat[letx][lety]=7;
-                        Registro.pintarMatriz();
+                        //Registro.pintarMatriz();
                     }else
                     if(lety < 14 && Registro.mat[letx][lety+1] == 2 ){
                         direccion = aleatorio.nextInt(4); 
