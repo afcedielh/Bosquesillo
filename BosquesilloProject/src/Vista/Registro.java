@@ -105,6 +105,9 @@ public class Registro {
                 if (lab.getpuntaje() == 0) {
                     JOptionPane.showMessageDialog(null, "Perdiste!", "Bosquesillo", JOptionPane.WARNING_MESSAGE);
                     System.exit(1);
+                }else if(lab.ValidarGano()){                
+                    JOptionPane.showMessageDialog(null, "Ganaste!", "Bosquesillo", JOptionPane.WARNING_MESSAGE);
+                    System.exit(1);
                 }
             }
 
@@ -245,6 +248,9 @@ public class Registro {
                     } else if (lab.getActor()[i][j].getJugador() != null) {
                         matriz[i][j].setIcon(new ImageIcon("imagenes/1.png"));
                         hayJugador = true;
+                    } else if (lab.getActor()[i][j].getObjetivo() != null) {
+                        matriz[i][j].setIcon(new ImageIcon("imagenes/10.png"));
+                        hayJugador = true;
                     } else {
                         matriz[i][j].setIcon(new ImageIcon("imagenes/0.png"));
                     }
@@ -308,6 +314,8 @@ public class Registro {
                         matriz[i][j].setIcon(new ImageIcon("imagenes/3.png"));
                     } else if (lab.getActor()[i][j].getJugador() != null) {
                         matriz[i][j].setIcon(new ImageIcon("imagenes/1.png"));
+                    } else if (lab.getActor()[i][j].getObjetivo() != null) {
+                        matriz[i][j].setIcon(new ImageIcon("imagenes/10.png"));
                     } else {
                         matriz[i][j].setIcon(new ImageIcon("imagenes/0.png"));
                     }

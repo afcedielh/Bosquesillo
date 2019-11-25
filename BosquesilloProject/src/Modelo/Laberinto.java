@@ -22,6 +22,7 @@ public class Laberinto {
         this.puntaje = puntaje;
         this.vidas = vidas;
         this.escudo = escudo;
+        this.PuntosObjetivo = CantidadPuntos;
     }
 
     public int getPuntosObjetivo() {
@@ -126,7 +127,7 @@ public class Laberinto {
                 y = r.nextInt(this.actor[0].length);
                 if (this.actor[x][y] == null) {
                     bandera = true;
-                    this.actor[x][y] = new Actor(null, new Carro(0, destino), null , null);
+                    this.actor[x][y] = new Actor(null, new Carro(0, destino), null, null);
                 }
             }
             bandera = false;
@@ -305,24 +306,28 @@ public class Laberinto {
                 if (actor[i][j] != null && actor[i][j].getCarro() != null) {
                     Actor ac = this.actor[i][j];
                     if (direccion == 1) {
+                        validarObjetivo(i, j - 1);
                         if (this.actor[i][j - 1] == null) {
                             this.actor[i][j] = null;
                             this.actor[i][j - 1] = ac;
                         }
                     }
                     if (direccion == 2) {
+                        validarObjetivo(i, j + 1);
                         if (this.actor[i][j + 1] == null) {
                             this.actor[i][j] = null;
                             this.actor[i][j + 1] = ac;
                         }
                     }
                     if (direccion == 3) {
+                        validarObjetivo(i - 1, j);
                         if (this.actor[i - 1][j] == null) {
                             this.actor[i][j] = null;
                             this.actor[i - 1][j] = ac;
                         }
                     }
                     if (direccion == 4) {
+                        validarObjetivo(i + 1, j);
                         if (this.actor[i + 1][j] == null) {
                             this.actor[i][j] = null;
                             this.actor[i + 1][j] = ac;
@@ -405,7 +410,27 @@ public class Laberinto {
         }
     }
 
+    private void validarObjetivo(int x, int y) {
+        if (this.actor[x][y] != null
+                && this.actor[x][y].getObjetivo() != null) {
+            this.actor[x][y] = null;
+        }
+    }
+
+    public Boolean ValidarGano() {
+        Boolean retornar = true;
+        for (int i = 0; i < actor.length; i++) {
+            for (int j = 0; j < actor[i].length; j++) {
+                if (actor[i][j] != null && actor[i][j].getObjetivo() != null) {
+                    retornar = false;
+                }
+            }
+        }
+        return retornar;
+    }
+
     private void DefinirPuntos() {
+        System.out.println("Puntos: " + this.PuntosObjetivo);
         for (int i = 0; i < this.PuntosObjetivo; i++) {
             boolean bandera = false;
             while (!bandera) {
@@ -414,9 +439,11 @@ public class Laberinto {
                 int y = r.nextInt(this.actor.length);
                 if (this.actor[x][y] == null) {
                     bandera = true;
+                    System.out.println("Objetivo");
                     this.actor[x][y] = new Actor(null, null, null, true);
                 }
             }
         }
+
     }
 }
