@@ -6,6 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.Timer;
 
+/**
+ *
+ * @author acediel
+ */
 public class Monstruos {
     
     //atributos
@@ -17,6 +21,11 @@ public class Monstruos {
     int mx;
     int my;
     
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public Monstruos( int x, int y ){
         aleatorio = new Random();
         letx = x;
@@ -26,8 +35,9 @@ public class Monstruos {
         this.movimiento();
     }//contrutor
     
-    
-    
+    /**
+     *
+     */
     public void movimiento(){
     
         timer = new Timer (200, new ActionListener () 

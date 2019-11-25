@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Clase encargada de definir y controlar toda la logica de negocio dentro del
+ * juego
+ *
+ * @author Gelen Ruano
+ */
 public class Laberinto {
 
     private int id;
@@ -14,6 +20,17 @@ public class Laberinto {
     private int escudo;
     private int PuntosObjetivo;
 
+    /**
+     * Constructor parametrico de la clase laberinto
+     *
+     * @param id Id del tablero
+     * @param actor Matriz que representa cada elemento dentro del tablero
+     * @param destino Lista de coordenadas de puntos objetivo
+     * @param puntaje Puntaje del jugador en el tablero
+     * @param vidas Cantidad de vidas restantes
+     * @param escudo Cantidad de escudos restantes
+     * @param CantidadPuntos Puntos totales objetivo
+     */
     public Laberinto(int id, Actor[][] actor, List<Coordenada> destino, int puntaje, int vidas, int escudo, int CantidadPuntos) {
         super();
         this.id = id;
@@ -25,62 +42,122 @@ public class Laberinto {
         this.PuntosObjetivo = CantidadPuntos;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPuntosObjetivo() {
         return PuntosObjetivo;
     }
 
+    /**
+     *
+     * @param PuntosObjetivo
+     */
     public void setPuntosObjetivo(int PuntosObjetivo) {
         this.PuntosObjetivo = PuntosObjetivo;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getescudo() {
         return escudo;
     }
 
+    /**
+     *
+     * @param escudo
+     */
     public void setescudo(int escudo) {
         this.escudo = escudo;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getpuntaje() {
         return puntaje;
     }
 
+    /**
+     *
+     * @param puntaje
+     */
     public void setpuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getvidas() {
         return vidas;
     }
 
+    /**
+     *
+     * @param vidas
+     */
     public void setvidas(int vidas) {
         this.vidas = vidas;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public Actor[][] getActor() {
         return actor;
     }
 
+    /**
+     *
+     * @param actor
+     */
     public void setActor(Actor[][] actor) {
         this.actor = actor;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Coordenada> getDestino() {
         return destino;
     }
 
+    /**
+     *
+     * @param destino
+     */
     public void setDestino(List<Coordenada> destino) {
         this.destino = destino;
     }
 
+    /**
+     *
+     * @param punto
+     */
     public void AgregarDestino(Coordenada punto) {
         if (this.destino == null) {
             this.destino = new ArrayList<Coordenada>();
@@ -98,6 +175,15 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Metodo encargado de generar de manera aleatoria la configuración inicial
+     * del tablero, esta configuración la realiza Instanciando la mitad de los
+     * monstruos como buenos y la otra mitad como malos.
+     *
+     * @param monstruos Cantidad de monstruos dentro del tablero
+     * @throws Exception Excepcion que se lanza cuando no se ha generado ningun
+     * tablero
+     */
     public void ConfigurarTablero(int monstruos) throws Exception {
         if (this.actor == null) {
             throw new Exception("No se ha generado una matriz aún.");
@@ -177,6 +263,12 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Metodo encargado de mover al jugador
+     *
+     * @param direccion Direcion a la cual se va a mover el jugador 1: Arriba,
+     * 2: abajo, 3: Izquierda, 4: Derecha
+     */
     public void Mover(int direccion) {
         puntaje--;
         for (int i = 0; i < actor.length; i++) {
@@ -229,6 +321,10 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Metodo encargado de reconfigrar el tablero, mueve cada uno de los
+     * mosntruos que se pueden mover en alguna dirección
+     */
     public void ReconfigurarTablero() {
         Random r = new Random();
         int direccion = 0;
@@ -300,6 +396,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Metodo encargado de mover en alguna direccion el carro
+     */
     private void moverCarro(int direccion) {
         for (int i = 0; i < actor.length; i++) {
             for (int j = 0; j < actor[i].length; j++) {
@@ -340,6 +439,10 @@ public class Laberinto {
 
     }
 
+    /**
+     * Metodo encargado de validar cacada uno de los monstruos ejecutando su
+     * respectiva función
+     */
     private void ValidarMonstruos(int x, int y) {
         validarCorazon(x, y);
         validarAngel(x, y);
@@ -349,6 +452,9 @@ public class Laberinto {
         validarVidas();
     }
 
+    /**
+     * Valida si a la posición en la que se va a mover hay un corazon
+     */
     private void validarCorazon(int x, int y) {
         if (this.actor[x][y] != null
                 && this.actor[x][y].getObstaculo() != null
@@ -358,6 +464,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Valida si a la posición en la que se va a mover hay un Angel
+     */
     private void validarAngel(int x, int y) {
         if (this.actor[x][y] != null
                 && this.actor[x][y].getObstaculo() != null
@@ -367,6 +476,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Valida si a la posición en la que se va a mover hay un Letal
+     */
     private void validarLetal(int x, int y) {
         if (this.actor[x][y] != null
                 && this.actor[x][y].getObstaculo() != null
@@ -381,6 +493,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Valida si a la posición en la que se va a mover hay un Tormenta
+     */
     private void validarTormenta(int x, int y) {
         if (this.actor[x][y] != null
                 && this.actor[x][y].getObstaculo() != null
@@ -394,6 +509,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Valida si a la posición en la que se va a mover hay un Escudo
+     */
     private void validarEscudo(int x, int y) {
         if (this.actor[x][y] != null
                 && this.actor[x][y].getObstaculo() != null
@@ -403,6 +521,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Valida si ya perdió el juego
+     */
     private void validarVidas() {
         if (this.puntaje == 0 && this.vidas > 0) {
             this.vidas--;
@@ -410,6 +531,9 @@ public class Laberinto {
         }
     }
 
+    /**
+     * Valida si a la posición en la que se va a mover hay un corazon
+     */
     private void validarObjetivo(int x, int y) {
         if (this.actor[x][y] != null
                 && this.actor[x][y].getObjetivo() != null) {
@@ -417,6 +541,10 @@ public class Laberinto {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean ValidarGano() {
         Boolean retornar = true;
         for (int i = 0; i < actor.length; i++) {

@@ -75,6 +75,9 @@ public class Registro {
     Monstruos letal3;
     static int matAux[][];
 
+    /**
+     *
+     */
     public Registro() {
 
         ventana = new JFrame("Bosquecillo");
@@ -184,6 +187,9 @@ public class Registro {
 
     }
 
+    /**
+     *
+     */
     public void jugar() {
         int X = Integer.parseInt(txtTamanoX.getText()) + 1;
         int Y = Integer.parseInt(txtTamanoY.getText()) + 1;
@@ -282,6 +288,9 @@ public class Registro {
         }
     }
 
+    /**
+     *
+     */
     public void pintarMatriz() {
         for (int i = 0; i < lab.getActor().length; i++) {
             for (int j = 0; j < lab.getActor()[i].length; j++) {
@@ -332,12 +341,20 @@ public class Registro {
         panelJuego.add(records, 0);
     }
 
+    /**
+     *
+     * @param opcion
+     * @return
+     */
     public int[][] tablero(int opcion) {
 
         int[][] aux1 = new int[100][100];
         return aux1;
     }
 
+    /**
+     *
+     */
     public void menu() {
 
         panelPresentacion.setVisible(false);
@@ -370,6 +387,9 @@ public class Registro {
 
     }//fin del menu
 
+    /**
+     *
+     */
     public void eventoMenu() {
 
         //boton jugar
