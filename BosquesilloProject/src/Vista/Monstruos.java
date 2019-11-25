@@ -109,7 +109,7 @@ public class Monstruos {
                 
                
         }});
-        timer.start();
+      //  timer.start();
     
     }//fin metodo;
     
